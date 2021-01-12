@@ -5,15 +5,16 @@ name: PVE-Kernel-CI
 
 # 触发条件
 on:
+  workflow_dispatch:
   # push:
   #  branches:
   #   - master
-  schedule:
-     - cron: 0 0 * * 3
+  #schedule:
+  #   - cron: 0 0 * * 3
   # release:
   #   types: [published]
-  watch:
-    types: [started]
+  #watch:
+  #  types: [started]
 
 # 环境变量
 env:
@@ -118,12 +119,12 @@ jobs:
       # 更新项目
       - name: Upload Branch
         env:
-          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
           sudo rm -rf pve-kernel tmp.txt .git*
           git init
-          git config user.name "yfdoor"
-          git config user.email "yfdoor@github.com"          
+          git config user.name "MK"
+          git config user.email "m4wayne@163.com"          
           git add .
           git commit -m "Update PVE-Kernel Package"
-          git push --force --quiet https://$GITHUB_TOKEN@github.com/yfdoor/PVE-Kernel.git HEAD:Kernel-Package
+          git push --force --quiet https://$GITHUB_TOKEN@github.com/m4wayne/PVE-Kernel.git HEAD:Kernel-Package
